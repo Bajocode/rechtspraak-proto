@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from '@/components/ui/button'
+import { TypeformButton } from '@/components/typeform-button'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       >
         Knoppie
       </Link>
+
       <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
         Phase 2 Template.
       </h1>
@@ -21,16 +23,14 @@ export default function Home() {
         This is a landing page template that is meant to test our traction channels and give a sneak peak to our future users.
       </p>
       <div className="space-x-4">
-        <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
-          Meld je nu aan!
-        </Link>
+        <TypeformButton />
         <Link
           href="#"
           target="_blank"
           rel="noreferrer"
           className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
         >
-          Pricing
+          Preorder!
         </Link>
       </div>
     </div>
