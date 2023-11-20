@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from '@/components/ui/button'
 import { TypeformButton } from '@/components/typeform-button'
 import Pricing from '@/components/pricing'
+import { TextareaForm } from '@/components/textarea-form'
 
 export default function Home() {
   return (
@@ -28,6 +29,16 @@ export default function Home() {
   className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24">
     <Pricing />
   </section>
+  
+  <section id="open-source" className="container py-8 md:py-12 lg:py-24">
+    <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
+    <h4 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-3xl">
+        Probeer het uit!
+      </h4>
+    <TextareaForm />
+    </div>
+  </section>
+
   {/* <section
   id="features"
   className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
