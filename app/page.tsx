@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { cn } from "@/lib/utils"
 import { buttonVariants } from '@/components/ui/button'
 import { TypeformButton } from '@/components/typeform-button'
+import Pricing from '@/components/pricing'
 
 export default function Home() {
   return (
@@ -17,18 +18,17 @@ export default function Home() {
       </p>
       <div className="space-x-4">
         <TypeformButton />
-        <Link
-          href="#"
-          target="_blank"
-          rel="noreferrer"
-          className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
-        >
-          Preorder!
-        </Link>
       </div>
+      <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xs sm:leading-8 italic">
+      <strong>Gelimiteerde plekken beschikbaar</strong>. RechtspraakPro is momenteel invite-only. 
+      </p>
     </div>
   </section>
-  <section
+  <section id="features"
+  className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24">
+    <Pricing />
+  </section>
+  {/* <section
   id="features"
   className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
 >
@@ -93,7 +93,7 @@ export default function Home() {
       Meld je nu aan voor de wachtlijst!
     </p>
   </div>
-</section>
+</section> */}
 </>
   )
 }

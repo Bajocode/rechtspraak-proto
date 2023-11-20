@@ -13,14 +13,6 @@ export function Nav() {
         </span>
       </Link>
         <nav className="hidden gap-6 md:flex">
-          <Link
-            href="#"
-            className={cn(
-              "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-              "text-foreground")} 
-          >
-            Linkie
-          </Link>
         </nav>
     </div>
   )
