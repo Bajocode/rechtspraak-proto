@@ -9,7 +9,7 @@ export function Nav() {
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="hidden items-center space-x-2 md:flex">
         <span className="hidden font-bold sm:inline-block">
-          Baseline
+          RechtspraakPro
         </span>
       </Link>
         <nav className="hidden gap-6 md:flex">

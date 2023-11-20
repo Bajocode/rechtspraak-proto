@@ -9,8 +9,8 @@ import { ThemeProvider } from '@/components/ui/theme-provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Phase 2 Template',
-  description: 'a Baseline Template',
+  title: 'RechtspraakPro',
+  description: 'RechtspraakPro',
 }
 
 export default function RootLayout({

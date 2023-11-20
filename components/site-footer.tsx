@@ -19,16 +19,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             >
               Baseline
             </a>
-            . The source code is available on{" "}
-            <a
-              href="#"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              GitHub
-            </a>
-            .
+            . 2023
           </p>
         </div>
         <ModeToggle />
