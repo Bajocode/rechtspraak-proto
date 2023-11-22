@@ -21,23 +21,25 @@ export default function Home() {
       <div className="space-x-4">
         <TypeformButton />
       </div>
-      <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xs sm:leading-8 italic">
+      <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xs sm:leading-8 italic py-6">
       <strong>Gelimiteerde plekken beschikbaar</strong>. RechtspraakPro is momenteel invite-only. 
       </p>
     </div>
   </section>
   <section id="features"
-  className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24">
+  className="container space-y-6 bg-slate-50 py-8  md:py-12 lg:py-24 dark:bg-slate-900">
     <Pricing />
   </section>
   
-  <section id="open-source" className="container py-8 md:py-12 lg:py-24">
-    <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-    <h4 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-3xl">
-        Probeer het uit!
-      </h4>
-    <TextareaForm />
-    <Chat />
+  <section id="chat" className="container md:py-12 lg:py-24">
+    <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4">
+      <h2 className="font-heading text-3xl sm:text-3xl md:text-5xl font-extrabold">
+      Probeer het uit!
+      </h2>
+      <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+        Zoek op ECLI, casenaam, blabla.
+      </p>
+      <Chat />
     </div>
   </section>
 

@@ -23,6 +23,7 @@ import {
     Twitter,
     User,
     X,
+    SendHorizonal,
   } from "lucide-react"
   
   export type Icon = LucideIcon
@@ -50,5 +51,6 @@ import {
     laptop: Laptop,
     twitter: Twitter,
     check: Check,
+    send: SendHorizonal,
   }
   

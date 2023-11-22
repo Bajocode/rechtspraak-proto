@@ -2,12 +2,28 @@
 
 import { Message, experimental_useAssistant as useAssistant } from 'ai/react';
 import { useEffect, useRef } from 'react';
+import { Button } from './ui/button';
+import { Icons } from './icons';
 
 const roleToColorMap: Record<Message['role'], string> = {
   system: 'whitespace-pre-wrap red',
-  user: 'whitespace-pre-wrap black',
+  user: 'whitespace-pre-wrap text-primary text-right',
   function: 'whitespace-pre-wrap blue',
-  assistant: 'whitespace-pre-wrap text-primary',
+  assistant: 'whitespace-pre-wrap text-primary text-right',
+};
+
+const roleToTitleMap: Record<Message['role'], string> = {
+  system: 'Systeem',
+  user: 'Gebruiker',
+  function: 'Functie',
+  assistant: 'Assistent',
+};
+
+const roleToDirectionMap: Record<Message['role'], string> = {
+  system: 'text-left',
+  user: 'text-right',
+  function: 'text-center',
+  assistant: 'text-left',
 };
 
 export default function Chat() {
@@ -25,41 +41,30 @@ export default function Chat() {
   }, [status]);
 
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto">
-      {error != null && (
-        <div className="relative bg-red-500 text-white px-6 py-4 rounded-md">
-          <span className="block sm:inline">
-            Error: {(error as any).toString()}
-          </span>
-        </div>
-      )}
-
-      {messages.map((m: Message) => (
-        <div
-          key={m.id}
-          className={roleToColorMap[m.role]}
-          // style={{ color: roleToColorMap[m.role] }}
-        >
-          {/* <strong>{`${m.role}: `}</strong> */}
-          {m.content}
-          <br />
-          <br />
-        </div>
-      ))}
-
-      {status === 'in_progress' && (
-        <div className="h-8 w-full max-w-md p-2 mb-8 bg-gray-300 dark:bg-gray-600 rounded-lg animate-pulse" />
-      )}
-    
-      <form onSubmit={submitMessage}>
+    <div className="flex-col w-full max-w-xl py-12 mx-auto">
+      <div className="max-h-72 rounded-lg p-6 overflow-y-scroll ">
+        {messages.map((m: Message) => (
+          <div key={m.id} className={roleToDirectionMap[m.role]}>
+            <strong className={roleToColorMap[m.role]}>{`${roleToTitleMap[m.role]}`}</strong>
+            <br />
+            {m.content}
+            <br />
+            <br />
+          </div>
+        ))}
+      </div>
+      <form onSubmit={submitMessage} className="py-6">
         <input
           ref={inputRef}
           disabled={status !== 'awaiting_message'}
-          className="bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
+          className={status === "in_progress" ? "bottom-0 w-full p-2 mb-8 rounded-lg border focus:outline-primary focus:outline-1 animate-pulse dark:bg-slate-900 bg-slate-50" : "bottom-0 w-full p-2 mb-8 rounded-lg border focus:outline-primary focus:outline-1 dark:bg-slate-900 bg-slate-50"}
           value={input}
-          placeholder="Vraag iets over een jurisprudentie"
+          placeholder={status === "in_progress" ? "Even geduld..." : "U had een vraag over jurisprudentie?"}
           onChange={handleInputChange}
         />
+        <Button disabled={status === "in_progress"}> 
+          <Icons.send/>
+        </Button>
       </form>
     </div>
   );
