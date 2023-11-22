@@ -4,10 +4,10 @@ import { Message, experimental_useAssistant as useAssistant } from 'ai/react';
 import { useEffect, useRef } from 'react';
 
 const roleToColorMap: Record<Message['role'], string> = {
-  system: 'red',
-  user: 'black',
-  function: 'blue',
-  assistant: 'green',
+  system: 'whitespace-pre-wrap red',
+  user: 'whitespace-pre-wrap black',
+  function: 'whitespace-pre-wrap blue',
+  assistant: 'whitespace-pre-wrap text-primary',
 };
 
 export default function Chat() {
@@ -37,10 +37,10 @@ export default function Chat() {
       {messages.map((m: Message) => (
         <div
           key={m.id}
-          className="whitespace-pre-wrap"
-          style={{ color: roleToColorMap[m.role] }}
+          className={roleToColorMap[m.role]}
+          // style={{ color: roleToColorMap[m.role] }}
         >
-          <strong>{`${m.role}: `}</strong>
+          {/* <strong>{`${m.role}: `}</strong> */}
           {m.content}
           <br />
           <br />
@@ -57,7 +57,7 @@ export default function Chat() {
           disabled={status !== 'awaiting_message'}
           className="bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
           value={input}
-          placeholder="What is the temperature in the living room?"
+          placeholder="Vraag iets over een jurisprudentie"
           onChange={handleInputChange}
         />
       </form>
