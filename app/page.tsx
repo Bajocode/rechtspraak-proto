@@ -5,7 +5,9 @@ import { buttonVariants } from '@/components/ui/button'
 import { TypeformButton } from '@/components/typeform-button'
 import Pricing from '@/components/pricing'
 import { TextareaForm } from '@/components/textarea-form'
-import Chat from '@/components/chat'
+import Chat from '@/components/chat-assistant'
+import ChatStream from '@/components/chat-stream'
+import ChatAssistant from '@/components/chat-assistant'
 
 export default function Home() {
   return (
@@ -39,7 +41,7 @@ export default function Home() {
       <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
         Zoek op ECLI, casenaam, blabla.
       </p>
-      <Chat />
+      <ChatAssistant />
     </div>
   </section>
 
