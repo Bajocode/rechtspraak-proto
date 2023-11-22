@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Check, Plus, Send } from "lucide-react"
+import { useChat } from "ai/react"
 
 import { cn } from "@/lib/utils"
 import {
@@ -73,28 +74,30 @@ type User = (typeof users)[number]
 export function CardsChat() {
   const [open, setOpen] = React.useState(false)
   const [selectedUsers, setSelectedUsers] = React.useState<User[]>([])
-
-  const [messages, setMessages] = React.useState([
-    {
-      role: "agent",
-      content: "Hi, how can I help you today?",
-    },
-    {
-      role: "user",
-      content: "Hey, I'm having trouble with my account.",
-    },
-    {
-      role: "agent",
-      content: "What seems to be the problem?",
-    },
-    {
-      role: "user",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-  ])
-  const [input, setInput] = React.useState("")
+  const { messages, input, handleSubmit, handleInputChange } = useChat();
+  // const [messages, setMessages] = React.useState([
+  //   {
+  //     role: "agent",
+  //     content: "Hi, how can I help you today?",
+  //   },
+  //   {
+  //     role: "user",
+  //     content: "Hey, I'm having trouble with my account.",
+  //   },
+  //   {
+  //     role: "agent",
+  //     content: "What seems to be the problem?",
+  //   },
+  //   {
+  //     role: "user",
+  //     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  //   },
+  // ])
+  
+  // const [input, setInput] = React.useState("")
   const inputLength = input.trim().length
   const scrollableContainerRef = React.useRef<HTMLDivElement>(null);
+  
 
   const scrollToBottom = () => {
     const scrollableContainer = scrollableContainerRef.current;
@@ -112,7 +115,7 @@ export function CardsChat() {
 
   return (
     <>
-      <Card className="max-w-[400px] space-y-6">
+      <Card className="w-[600px] space-y-6">
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>
@@ -141,7 +144,7 @@ export function CardsChat() {
             </Tooltip>
           </TooltipProvider>
         </CardHeader>
-        <CardContent ref={scrollableContainerRef} className="flex-1 overflow-y-auto max-h-[300px] space-y-4">
+        <CardContent ref={scrollableContainerRef} className="flex-1 overflow-y-auto h-[400px] space-y-4">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div
@@ -160,27 +163,29 @@ export function CardsChat() {
         </CardContent>
         <CardFooter>
           <form
-            onSubmit={(event) => {
-              event.preventDefault()
-              if (inputLength === 0) return
-              setMessages([
-                ...messages,
-                {
-                  role: "user",
-                  content: input,
-                },
-              ])
-              setInput("")
-            }}
+            // onSubmit={(event) => {
+            //   event.preventDefault()
+            //   if (inputLength === 0) return
+            //   setMessages([
+            //     ...messages,
+            //     {
+            //       role: "user",
+            //       content: input,
+            //     },
+            //   ])
+            //   setInput("")
+            // }}
+            onSubmit={handleSubmit}
             className="flex w-full items-center space-x-2"
           >
             <Input
               id="message"
-              placeholder="Type your message..."
+              placeholder="Vraag maar raak!..."
               className="flex-1"
               autoComplete="off"
               value={input}
-              onChange={(event) => setInput(event.target.value)}
+              onChange={handleInputChange}
+              // onChange={(event) => setInput(event.target.value)}
             />
             <Button type="submit" size="icon" disabled={inputLength === 0}>
               <Send className="h-4 w-4" />

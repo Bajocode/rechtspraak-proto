@@ -29,8 +29,7 @@ export default function Home() {
       </p>
     </div>
   </section>
-  <section id="features"
-  className="container space-y-6 bg-slate-50 py-8  md:py-12 lg:py-24 dark:bg-slate-900">
+  <section id="features" className="container space-y-6 bg-slate-50 py-8  md:py-12 lg:py-24 dark:bg-slate-900">
     <Pricing />
   </section>
   
