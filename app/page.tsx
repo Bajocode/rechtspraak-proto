@@ -8,6 +8,7 @@ import { TextareaForm } from '@/components/textarea-form'
 import Chat from '@/components/chat-assistant'
 import ChatStream from '@/components/chat-stream'
 import ChatAssistant from '@/components/chat-assistant'
+import { CardsChat } from '@/components/cards-chat'
 
 export default function Home() {
   return (
@@ -41,7 +42,8 @@ export default function Home() {
       <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
         Zoek op ECLI, casenaam, blabla.
       </p>
-      <ChatAssistant />
+      {/* <ChatAssistant /> */}
+      <CardsChat />
     </div>
   </section>
 
