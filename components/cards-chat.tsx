@@ -89,15 +89,30 @@ export function CardsChat() {
     },
     {
       role: "user",
-      content: "I can't log in.",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
   ])
   const [input, setInput] = React.useState("")
   const inputLength = input.trim().length
+  const scrollableContainerRef = React.useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    const scrollableContainer = scrollableContainerRef.current;
+    if (scrollableContainer) {
+      const scrollHeight = scrollableContainer.scrollHeight;
+      const height = scrollableContainer.clientHeight;
+      const maxScrollTop = scrollHeight - height;
+      scrollableContainer.scrollTo({ top: maxScrollTop, behavior: 'smooth' });
+    }
+  };
+
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <>
-      <Card>
+      <Card className="max-w-[500px] flex flex-col">
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>
@@ -126,7 +141,7 @@ export function CardsChat() {
             </Tooltip>
           </TooltipProvider>
         </CardHeader>
-        <CardContent>
+        <CardContent ref={scrollableContainerRef} className="flex-1 overflow-y-auto max-h-[300px]">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div
@@ -143,7 +158,7 @@ export function CardsChat() {
             ))}
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="py-2">
           <form
             onSubmit={(event) => {
               event.preventDefault()
