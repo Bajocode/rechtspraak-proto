@@ -5,6 +5,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { TypeformButton } from '@/components/typeform-button'
 import Pricing from '@/components/pricing'
 import { TextareaForm } from '@/components/textarea-form'
+import Chat from '@/components/chat'
 
 export default function Home() {
   return (
@@ -35,7 +36,8 @@ export default function Home() {
     <h4 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-3xl">
         Probeer het uit!
       </h4>
-    <TextareaForm />
+    {/* <TextareaForm /> */}
+    <Chat />
     </div>
   </section>
 
