@@ -115,7 +115,7 @@ export function CardsChat() {
 
   return (
     <>
-      <Card className="w-[600px] space-y-6">
+      <Card className="max-w-[400px] space-y-6">
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>
@@ -144,7 +144,7 @@ export function CardsChat() {
             </Tooltip>
           </TooltipProvider>
         </CardHeader>
-        <CardContent ref={scrollableContainerRef} className="flex-1 overflow-y-auto h-[400px] space-y-4">
+        <CardContent ref={scrollableContainerRef} className="flex-1 overflow-y-auto h-[300px] space-y-4">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div

@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import { SiteFooter } from '@/components/site-footer'
 import { Nav } from '@/components/nav'
 import { ThemeProvider } from '@/components/ui/theme-provider'
+import { ModeToggle } from '@/components/ui/mode-toggle'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,6 +32,7 @@ export default function RootLayout({
             <header className="container z-40 bg-background">
               <div className="flex h-20 items-center justify-between py-6">
                 <Nav />
+                <ModeToggle />
               </div>
             </header>
             <main className="flex-1">{children}</main>
