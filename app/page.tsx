@@ -9,42 +9,44 @@ import Chat from '@/components/chat-assistant'
 import ChatStream from '@/components/chat-stream'
 import ChatAssistant from '@/components/chat-assistant'
 import { CardsChat } from '@/components/cards-chat'
+import Hero from '@/components/hero'
 
 export default function Home() {
   return (
     <>
-    <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-    <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
-      <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
-        RechtspraakPro 
-      </h1>
-      <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-        Vind snel relevante jurisprudentie.
-      </p>
-      <div className="space-x-4">
-        <TypeformButton />
-      </div>
-      <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xs sm:leading-8 italic py-6">
-      <strong>Gelimiteerde plekken beschikbaar</strong>. RechtspraakPro is momenteel invite-only. 
-      </p>
-    </div>
-  </section>
-  <section id="features" className="container space-y-6 bg-slate-50 py-8  md:py-12 lg:py-24 dark:bg-slate-900">
-    <Pricing />
-  </section>
-  
-  <section id="chat" className="container md:py-12 lg:py-24">
-    <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4">
-      <h2 className="font-heading text-3xl sm:text-3xl md:text-5xl font-extrabold">
-      Probeer het uit!
-      </h2>
-      <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-        Zoek op ECLI, casenaam, blabla.
-      </p>
-      {/* <ChatAssistant /> */}
-      <CardsChat />
-    </div>
-  </section>
+      <Hero />
+      <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
+        <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
+          <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+            RechtspraakPro 
+          </h1>
+          <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
+            Vind snel relevante jurisprudentie.
+          </p>
+          <div className="space-x-4">
+            <TypeformButton />
+          </div>
+          <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xs sm:leading-8 italic py-6">
+          <strong>Gelimiteerde plekken beschikbaar</strong>. RechtspraakPro is momenteel invite-only. 
+          </p>
+        </div>
+      </section>
+      <section id="features" className="container space-y-6 bg-slate-50 py-8  md:py-12 lg:py-24 dark:bg-slate-900">
+        <Pricing />
+      </section>
+      
+      <section id="chat" className="container md:py-12 lg:py-24">
+        <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4">
+          <h2 className="font-heading text-3xl sm:text-3xl md:text-5xl font-extrabold">
+          Probeer het uit!
+          </h2>
+          <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+            Zoek op ECLI, casenaam, blabla.
+          </p>
+          {/* <ChatAssistant /> */}
+          <CardsChat />
+        </div>
+      </section>
 
   {/* <section
   id="features"
