@@ -112,16 +112,16 @@ export function CardsChat() {
 
   return (
     <>
-      <Card className="max-w-[500px] flex flex-col">
+      <Card className="max-w-[400px] space-y-6">
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>
-              <AvatarImage src="/next.svg" alt="Image" />
-              <AvatarFallback>OM</AvatarFallback>
+              <AvatarImage src="/jurre-avatar.png" alt="Image" />
+              <AvatarFallback>BL</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-medium leading-none">Sofia Davis</p>
-              <p className="text-sm text-muted-foreground">m@example.com</p>
+              <p className="text-sm font-medium leading-none">Jurre</p>
+              <p className="text-sm text-muted-foreground">Jurisprudentie Assistent NL</p>
             </div>
           </div>
           <TooltipProvider delayDuration={0}>
@@ -141,7 +141,7 @@ export function CardsChat() {
             </Tooltip>
           </TooltipProvider>
         </CardHeader>
-        <CardContent ref={scrollableContainerRef} className="flex-1 overflow-y-auto max-h-[300px]">
+        <CardContent ref={scrollableContainerRef} className="flex-1 overflow-y-auto max-h-[300px] space-y-4">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div
@@ -158,7 +158,7 @@ export function CardsChat() {
             ))}
           </div>
         </CardContent>
-        <CardFooter className="py-2">
+        <CardFooter>
           <form
             onSubmit={(event) => {
               event.preventDefault()
