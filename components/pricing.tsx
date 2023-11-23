@@ -12,10 +12,10 @@ export default function Pricing() {
   return (
     <section className="container flex flex-col  gap-6 py-8 md:max-w-[64rem]">
       <div className="mx-auto flex w-full flex-col gap-4 md:max-w-[58rem]">
-        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl font-semibold">
+        <h2 className="leading-[1.1] xs:text-2xl sm:text-3xl md:text-4xl lg:text-6xl lg:text font-bold">
           Transparante prijzen
         </h2>
-        <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+        <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7 lg:text-l font-light">
         Ontgrendel alle functies, inclusief onbeperkte zoekopdrachten.
         </p>
       </div>
@@ -59,10 +59,10 @@ export default function Pricing() {
         </div>
       </div>
       <div className="mx-auto flex w-full max-w-[58rem] flex-col gap-4">
-        <p className="max-w-[85%] leading-normal text-muted-foreground sm:leading-7">
+        {/* <p className="max-w-[85%] leading-normal text-muted-foreground sm:leading-7">
           Probeer het gratis uit.{" "}
           <strong>Bla bla.</strong>
-        </p>
+        </p> */}
       </div>
     </section>
   )

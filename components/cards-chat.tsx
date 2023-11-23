@@ -1,22 +1,18 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Check, Plus, Send } from "lucide-react"
-import { useChat } from "ai/react"
+import * as React from "react";
+import { Check, Plus, Send } from "lucide-react";
+import { useChat } from "ai/react";
 
-import { cn } from "@/lib/utils"
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   Command,
   CommandEmpty,
@@ -24,7 +20,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from "@/components/ui/command";
 import {
   Dialog,
   DialogContent,
@@ -32,14 +28,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from "@/components/ui/tooltip";
 
 const users = [
   {
@@ -67,13 +63,13 @@ const users = [
     email: "will@email.com",
     avatar: "/avatars/04.png",
   },
-] as const
+] as const;
 
-type User = (typeof users)[number]
+type User = (typeof users)[number];
 
 export function CardsChat() {
-  const [open, setOpen] = React.useState(false)
-  const [selectedUsers, setSelectedUsers] = React.useState<User[]>([])
+  const [open, setOpen] = React.useState(false);
+  const [selectedUsers, setSelectedUsers] = React.useState<User[]>([]);
   const { messages, input, handleSubmit, handleInputChange } = useChat();
   // const [messages, setMessages] = React.useState([
   //   {
@@ -93,11 +89,10 @@ export function CardsChat() {
   //     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   //   },
   // ])
-  
+
   // const [input, setInput] = React.useState("")
-  const inputLength = input.trim().length
+  const inputLength = input.trim().length;
   const scrollableContainerRef = React.useRef<HTMLDivElement>(null);
-  
 
   const scrollToBottom = () => {
     const scrollableContainer = scrollableContainerRef.current;
@@ -105,17 +100,20 @@ export function CardsChat() {
       const scrollHeight = scrollableContainer.scrollHeight;
       const height = scrollableContainer.clientHeight;
       const maxScrollTop = scrollHeight - height;
-      scrollableContainer.scrollTo({ top: maxScrollTop, behavior: 'smooth' });
+      scrollableContainer.scrollTo({ top: maxScrollTop, behavior: "smooth" });
     }
   };
 
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
   React.useEffect(() => {
     scrollToBottom();
+    inputRef.current?.focus();
   }, [messages]);
 
   return (
     <>
-      <Card className="max-w-[400px] space-y-6">
+      <Card className="max-w-[400px] space-y-6 border-0 dark:border shadow-lg">
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>
@@ -123,8 +121,10 @@ export function CardsChat() {
               <AvatarFallback>BL</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-medium leading-none">Jurre</p>
-              <p className="text-sm text-muted-foreground">Jurisprudentie Assistent NL</p>
+              <p className="text-sm font-medium leading-none">Jurre Ai</p>
+              <p className="text-sm text-muted-foreground">
+                Jurisprudentie Assistent NL
+              </p>
             </div>
           </div>
           <TooltipProvider delayDuration={0}>
@@ -144,7 +144,10 @@ export function CardsChat() {
             </Tooltip>
           </TooltipProvider>
         </CardHeader>
-        <CardContent ref={scrollableContainerRef} className="flex-1 overflow-y-auto h-[300px] space-y-4">
+        <CardContent
+          ref={scrollableContainerRef}
+          className="flex-1 overflow-y-auto h-[100px] lg:h-[300px] h space-y-4"
+        >
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div
@@ -185,6 +188,7 @@ export function CardsChat() {
               autoComplete="off"
               value={input}
               onChange={handleInputChange}
+              ref={inputRef}
               // onChange={(event) => setInput(event.target.value)}
             />
             <Button type="submit" size="icon" disabled={inputLength === 0}>
@@ -218,14 +222,14 @@ export function CardsChat() {
                           selectedUsers.filter(
                             (selectedUser) => selectedUser !== user
                           )
-                        )
+                        );
                       }
 
                       return setSelectedUsers(
                         [...users].filter((u) =>
                           [...selectedUsers, user].includes(u)
                         )
-                      )
+                      );
                     }}
                   >
                     <Avatar>
@@ -269,7 +273,7 @@ export function CardsChat() {
             <Button
               disabled={selectedUsers.length < 2}
               onClick={() => {
-                setOpen(false)
+                setOpen(false);
               }}
             >
               Continue
@@ -278,5 +282,5 @@ export function CardsChat() {
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }
