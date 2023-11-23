@@ -155,7 +155,7 @@ export function CardsChat() {
               <AvatarFallback>BL</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-medium leading-none">Jurre Ai</p>
+              <p className="text-sm font-medium leading-none">Rechtspraak Ai</p>
               <p className="text-sm text-muted-foreground">
                 Jurisprudentie Assistent NL
               </p>
