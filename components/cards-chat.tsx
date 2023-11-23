@@ -36,6 +36,38 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { type } from "os";
+
+const eclis = [
+  {
+    ecliId: "ECLI:NL:RBZWB:2023:7",
+    title: "ECLI:NL:RBZWB:2023:7, Rechtbank Zeeland-West-Brabant, 02-01-2023, 02-226419-21",
+    summary: "Vrijspraak aanranding. De aangifte vindt onvoldoende steun in andere bewijsmiddelen.",
+    updated: "updated",
+    link: "https://uitspraken.rechtspraak.nl/#!/details?id=ECLI:NL:RBZWB:2023:7"
+  },
+  {
+    ecliId: "ECLI:NL:RBZWB:2023:9",
+    title: "ECLI:NL:RBZWB:2023:9, Rechtbank Zeeland-West-Brabant, 02-01-2023, 02/147750-21",
+    summary: "Bewezenverklaring artikel 6 en 5 WVW. Overschrijding toegestane maximumsnelheid. Verweer betrouwbaarheid snelheidsberekening door de politie. Voorrang. Letsel tijdelijke verhindering in de uitoefening normale bezigheden. Taakstraf 80 uur en voorwaardelijke ontzegging rijbevoegdheid van 3 maanden met proeftijd 2 jaar. Eendaadse samenloop. Vorderingen benadeelde partijen niet-ontvankelijk. Onvold...",
+    updated: "2023-01-02T12:00:06Z",
+    link: "https://uitspraken.rechtspraak.nl/#!/details?id=ECLI:NL:RBZWB:2023:9"
+  },
+  {
+    ecliId: "ECLI:NL:RBDHA:2023:27",
+    title: "ECLI:NL:RBZWB:2023:7, Rechtbank Zeeland-West-Brabant, 02-01-2023, 02-226419-2ECLI:NL:RBDHA:2023:27, Rechtbank Den Haag, 03-01-2023, SGR 21/61331",
+    summary: "Ontvankelijkheid bezwaarschrift tegen afwijzing WIA-uitkering. Het UWV had het bezwaarschrift tegen de afwijzing van de WIA-uitkering ontvankelijk moeten verklaren, en daarna inhoudelijk moeten beoordelen, omdat het primaire besluit op een rechtsgevolg was gericht. Beroep gegrond.",
+    updated: "2023-01-03T10:02:52Z",
+    link: "https://uitspraken.rechtspraak.nl/#!/details?id=ECLI:NL:RBDHA:2023:27"
+  },
+  {
+    ecliId: "ECLI:NL:RBZWB:2023:11",
+    title: "ECLI:NL:RBZWB:2023:11, Rechtbank Zeeland-West-Brabant, 03-01-2023, 02/007378-22",
+    summary: "Verdachte wordt veroordeeld voor twee mishandelingen en stalking van zijn ex-echtgenote.Gezien zijn proceshouding en strafblad komt de rechtbank, naast een taakstraf van 120 uur, tot een voorwaardelijke gevangenisstraf van vier maanden met een proeftijd van 3 jaar, met daaraan o.a. gekoppeld een direct uitvoerbaar contact -en locatieverbod.",
+    updated: "2023-01-03T12:41:00Z",
+    link: "https://uitspraken.rechtspraak.nl/#!/details?id=ECLI:NL:RBZWB:2023:11"
+  },
+]
 
 const users = [
   {
@@ -66,10 +98,12 @@ const users = [
 ] as const;
 
 type User = (typeof users)[number];
+type ECLI = (typeof eclis)[number];
 
 export function CardsChat() {
   const [open, setOpen] = React.useState(false);
-  const [selectedUsers, setSelectedUsers] = React.useState<User[]>([]);
+  // const [selectedUsers, setSelectedUsers] = React.useState<User[]>([]);
+  const [selectedEcli, setSelectedEcli] = React.useState<ECLI[]>([]);
   const { messages, input, handleSubmit, handleInputChange } = useChat();
   // const [messages, setMessages] = React.useState([
   //   {
@@ -201,17 +235,55 @@ export function CardsChat() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="gap-0 p-0 outline-none">
           <DialogHeader className="px-4 pb-4 pt-5">
-            <DialogTitle>New message</DialogTitle>
+            <DialogTitle>Rechtspraak Databank</DialogTitle>
             <DialogDescription>
-              Invite a user to this thread. This will create a new group
-              message.
+              Combineer case IDs en leg nieuwe verbanden!
             </DialogDescription>
           </DialogHeader>
           <Command className="overflow-hidden rounded-t-none border-t">
-            <CommandInput placeholder="Search user..." />
+            <CommandInput placeholder="Zoek op case..." />
             <CommandList>
               <CommandEmpty>No users found.</CommandEmpty>
               <CommandGroup className="p-2">
+                {eclis.map((ecli) => (
+                  <CommandItem
+                    key={ecli.ecliId}
+                    className="flex items-center px-2"
+                    onSelect={() => {
+                      if (selectedEcli.includes(ecli)) {
+                        return setSelectedEcli(
+                          selectedEcli.filter(
+                            (selectedEcli) => selectedEcli !== ecli
+                          )
+                        );
+                      }
+
+                      return setSelectedEcli(
+                        [...eclis].filter((e) =>
+                          [...selectedEcli, ecli].includes(e)
+                        )
+                      );
+                    }}
+                  >
+                    {/* <Avatar>
+                      <AvatarImage src={user.avatar} alt="Image" />
+                      <AvatarFallback>{user.name[0]}</AvatarFallback>
+                    </Avatar> */}
+                    <div className="ml-2">
+                      <p className="text-sm font-medium leading-none">
+                        {ecli.title}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {ecli.summary}
+                      </p>
+                    </div>
+                    {selectedEcli.includes(ecli) ? (
+                      <Check className="ml-auto flex h-5 w-5 text-primary" />
+                    ) : null}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+              {/* <CommandGroup className="p-2">
                 {users.map((user) => (
                   <CommandItem
                     key={user.email}
@@ -249,29 +321,30 @@ export function CardsChat() {
                     ) : null}
                   </CommandItem>
                 ))}
-              </CommandGroup>
+              </CommandGroup> */}
             </CommandList>
           </Command>
           <DialogFooter className="flex items-center border-t p-4 sm:justify-between">
-            {selectedUsers.length > 0 ? (
+            {selectedEcli.length > 0 ? (
               <div className="flex -space-x-2 overflow-hidden">
-                {selectedUsers.map((user) => (
-                  <Avatar
-                    key={user.email}
-                    className="inline-block border-2 border-background"
-                  >
-                    <AvatarImage src={user.avatar} />
-                    <AvatarFallback>{user.name[0]}</AvatarFallback>
-                  </Avatar>
+                {selectedEcli.map((ecli) => (
+                  // <Avatar
+                  //   key={ecli.id}
+                  //   className="inline-block border-2 border-background"
+                  // >
+                  //   <AvatarImage src={ecli.avatar} />
+                  //   <AvatarFallback>{user.name[0]}</AvatarFallback>
+                  // </Avatar>
+                  <p key={ecli.ecliId}>{ecli.ecliId}</p>
                 ))}
               </div>
             ) : (
               <p className="text-sm text-muted-foreground">
-                Select users to add to this thread.
+                Selecteer cases om toe te voegen aan de zoekopdracht.
               </p>
             )}
             <Button
-              disabled={selectedUsers.length < 2}
+              disabled={selectedEcli.length < 1}
               onClick={() => {
                 setOpen(false);
               }}
