@@ -223,6 +223,7 @@ export function CardsChat() {
               value={input}
               onChange={handleInputChange}
               ref={inputRef}
+
               // onChange={(event) => setInput(event.target.value)}
             />
             <Button type="submit" size="icon" disabled={inputLength === 0}>
@@ -257,10 +258,9 @@ export function CardsChat() {
                           )
                         );
                       }
-
                       return setSelectedEcli(
-                        [...eclis].filter((e) =>
-                          [...selectedEcli, ecli].includes(e)
+                        [...eclis].filter((e) => {
+                          [...selectedEcli, ecli].includes(e) }
                         )
                       );
                     }}
