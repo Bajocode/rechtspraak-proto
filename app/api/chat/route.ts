@@ -43,8 +43,10 @@ export async function POST(req: Request) {
     ]
     console.log(prompt)
     // Ask OpenAI for a streaming chat completion given the prompt
+    // const chatModel = "gpt-3.5-turbo"
+    const chatModel = "gpt-4-1106-preview"
     const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
+      model: chatModel,
       stream: true,
       messages: [...prompt, ...messages.filter((message: Message) => message.role === 'user')]
     })
