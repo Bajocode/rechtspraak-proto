@@ -8,8 +8,6 @@ import {
 // The function `getContext` is used to retrieve the context of a given message
 export const getContext = async (
   message: string,
-  getOnlyText = true,
-  namespace: string,
   maxTokens = 3000,
   minScore = 0.7
 ): Promise<string | ScoredPineconeRecord[]> => {
@@ -17,7 +15,7 @@ export const getContext = async (
   const embedding = await getEmbeddings(message);
 
   // Retrieve the matches for the embeddings from the specified namespace
-  const matches = await getMatchesFromEmbeddings(embedding, 3, namespace);
+  const matches = await getMatchesFromEmbeddings(embedding, 3);
   const formatted = matches.map((match) => formattedMatch(match));
   return formatted.join("\n").substring(0); // maxTokens
   // Filter out the matches that have a score lower than the minimum score
@@ -98,8 +96,7 @@ export type Metadata = {
 // The function `getMatchesFromEmbeddings` is used to retrieve matches for the given embeddings
 const getMatchesFromEmbeddings = async (
   embeddings: number[],
-  topK: number,
-  namespace: string
+  topK: number
 ): Promise<ScoredPineconeRecord<Metadata>[]> => {
   // Obtain a client for Pinecone
   const pinecone = new Pinecone();
@@ -119,7 +116,7 @@ const getMatchesFromEmbeddings = async (
   const index = pinecone!.Index<Metadata>(indexName);
 
   // Get the namespace
-  const pineconeNamespace = index.namespace(namespace ?? "");
+  const pineconeNamespace = index.namespace("");
 
   try {
     // Query the index with the defined request
