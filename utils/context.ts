@@ -17,9 +17,9 @@ export const getContext = async (
   const embedding = await getEmbeddings(message);
 
   // Retrieve the matches for the embeddings from the specified namespace
-  const matches = await getMatchesFromEmbeddings(embedding, 20, namespace);
-  const formatted =  matches.map((match) => formattedMatch(match))
-  return formatted.join("\n").substring(0); // maxTokens 
+  const matches = await getMatchesFromEmbeddings(embedding, 3, namespace);
+  const formatted = matches.map((match) => formattedMatch(match));
+  return formatted.join("\n").substring(0); // maxTokens
   // Filter out the matches that have a score lower than the minimum score
   // const qualifyingDocs = matches.filter((m) => m.score && m.score > minScore);
   // return docs.join("\n").substring(0, maxTokens);
@@ -27,35 +27,32 @@ export const getContext = async (
   //   ? matches.map((match) => (match.metadata as Metadata).summary)
   //   : [];
   // Join all the chunks of text together, truncate to the maximum number of tokens, and return the result
-
 };
 
-// {
-//   id: 'ECLI:NL:RBZWB:2023:2684',
-//   score: 0.813431084,
-//   values: [],
-//   sparseValues: undefined,
-//   metadata: {
-  //   link: 'https://uitsprake...
-  //   summary: 'HUUR',
-  //   title: 'ECLI:NL:RBZWB:202...
-  //   updated: '2023-04-25T06:00:24Z'
-// }
-
 function formattedMatch(match: ScoredPineconeRecord): string {
-  const id = match.id
-  const metadata = match.metadata as Metadata
-  const title = metadata.title
-  const summary = metadata.summary
-  const updated = metadata.updated
-  const link = metadata.link
+  const id = match.id;
+  const metadata = match.metadata as Metadata;
+  const caseType = metadata.type_uitspraak_conclusie;
 
   return `
-  Titel: ${title}
-  Samenvatting: ${summary}
-  Link: ${link}
-  Case update datum: ${updated}
-  `
+  ECLI Nummer: ${metadata.identifier_ecli}
+  Document Titel: ${metadata.title}
+  Document Samenvatting: ${metadata.summary}
+  Source: ${metadata.link}
+  ECLI Publicatiedatum: ${metadata.issued_publicatiedatum}
+  Document Uitgever: ${metadata.publisher}
+  Instantie Verantwoordelijk: ${metadata.creator_instantie}
+  ${caseType} Datum: ${metadata.date_uitspraak}
+  Zaaknummer: ${metadata.zaaknummer}
+  Type: ${metadata.type_uitspraak_conclusie}
+  Procedure: ${metadata.procedure}
+  Geografisch Gebied: ${metadata.coverage_uitspraakgeo}
+  Zittingsplaats: ${metadata.spatial_zittingloc}
+  Rechtsgebied: ${metadata.subject_rechtsgebied}
+  Geregistreerde Vindplaatsen: ${metadata.hasversion_vindplaatsen}
+  Volledige ${caseType}: ${metadata.uitspraak}
+  Datum van Document Bezichtiging: ${metadata.last_scraped_at}
+  `;
 }
 
 const config = new Configuration({
@@ -79,10 +76,23 @@ export async function getEmbeddings(input: string): Promise<number[]> {
 }
 
 export type Metadata = {
-  title: string;
-  updated: string;
-  link: string;
-  summary: string;
+  identifier_ecli: string; // ECLI Nummer
+  title: string; // Document Titel
+  summary: string; // Document Samenvatting
+  link: string; // Source
+  issued_publicatiedatum: string; // ECLI Publicatiedatum
+  publisher: string; // Document Uitgever
+  creator_instantie: string; // Instantie Verantwoordelijk voor de {case_type}
+  date_uitspraak: string; // {case_type} Datum
+  zaaknummer: string; // Zaaknummer
+  type_uitspraak_conclusie: string; // Type
+  procedure: string; // Procedure
+  coverage_uitspraakgeo: string; // Geografisch Gebied {case_type}
+  spatial_zittingloc: string; // Zittingsplaats
+  subject_rechtsgebied: string; // Rechtsgebied
+  hasversion_vindplaatsen: string; // Geregistreerde Vindplaatsen van {case_type}
+  uitspraak: string; // Volledige {case_type}
+  last_scraped_at: string; // Datum van Document Bezichtiging
 };
 
 // The function `getMatchesFromEmbeddings` is used to retrieve matches for the given embeddings
